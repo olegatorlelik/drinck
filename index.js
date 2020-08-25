@@ -62,26 +62,26 @@
 // console.log(dog.voiceAnimal());
 
 class Storage {
-  drinks = {
+  DrinkStorage = {
     mojito: ["Ром", "Содовая", "Лайм", "Мята"],
     cubaLibre: ["Ром", "кола", "лайм"],
     afterDrinck: ["Водка", "Мартини", "огурец"],
   };
   reset() {
-    for (let i in this.drinks) {
-      delete this.drinks[i];
+    for (let i in this.DrinkStorage) {
+      delete this.DrinkStorage[i];
     }
   }
   addValue(key, value) {
-    return (this.drinks[key] = value);
+    return (this.DrinkStorage[key] = value);
   }
   getValue(key) {
-    return this.drinks[key];
+    return this.DrinkStorage[key];
   }
   deleteValue(key) {
-    for (let i in this.drinks) {
-      if (this.drinks[i] === this.drinks[key]) {
-        delete this.drinks[i];
+    for (let i in this.DrinkStorage) {
+      if (this.DrinkStorage[i] === this.DrinkStorage[key]) {
+        delete this.DrinkStorage[i];
         return true;
       } else {
         return false;
@@ -89,7 +89,7 @@ class Storage {
     }
   }
   getKeys() {
-    return Object.keys(this.drinks);
+    return Object.keys(this.DrinkStorage);
   }
 }
 
