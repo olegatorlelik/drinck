@@ -62,11 +62,13 @@
 // console.log(dog.voiceAnimal());
 
 class Storage {
-  DrinkStorage = {
-    mojito: ["Ром", "Содовая", "Лайм", "Мята"],
-    cubaLibre: ["Ром", "кола", "лайм"],
-    afterDrinck: ["Водка", "Мартини", "огурец"],
-  };
+  constructor() {
+    this.DrinkStorage = {
+      mojito: ["Ром", "Содовая", "Лайм", "Мята"],
+      cubaLibre: ["Ром", "кола", "лайм"],
+      afterDrinck: ["Водка", "Мартини", "огурец"],
+    };
+  }
   reset() {
     for (let i in this.DrinkStorage) {
       delete this.DrinkStorage[i];
@@ -92,12 +94,21 @@ class Storage {
     return Object.keys(this.DrinkStorage);
   }
 }
+const drinck = new Storage();
+console.log(drinck.DrinkStorage);
+let nameDrink = prompt("Введи название напитка");
+let composishonDrink = prompt("Введи состав").split(",");
+drinck.addValue(nameDrink, composishonDrink);
+console.log(drinck);
 
-// const check = new Storage();
-// console.log(check.getKeys());
-// check.deleteValue(check.drinks.mojito);
-// console.log(check.deleteValue("mojito"));
-// console.log(check);
-// console.log(check.getValue("mojito"));
+let intNameDrinck = prompt("хочешь узнать рецепт? введи название напитка");
+for (let i in drinck.DrinkStorage) {
+  if (i === intNameDrinck) {
+    alert(drinck.DrinkStorage[i]);
+  }
+}
+let qstionNameDrink = prompt("Какой напиток хочешь удалить?");
+drinck.deleteValue(qstionNameDrink);
+console.log(drinck);
 
-// CHECK NEW BRANCH
+
