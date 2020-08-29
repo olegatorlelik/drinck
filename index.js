@@ -1,66 +1,3 @@
-// let heiter = {
-//   name: "Bil",
-//   lastName: "Geits",
-//   getName() {
-//     return this.name + "" + this.lastName;
-//   },
-// };
-// console.log(heiter.getName());
-
-// let heiter2 = {
-//   name: "donald",
-//   lastName: "tramp",
-//   getName() {
-//     return this.name + "" + this.lastName;
-//   },
-// };
-// console.log(heiter2.getName());
-
-// class Heiter {
-//   constructor(name, lastName) {
-//     this.name = name;
-//     this.lastName = lastName;
-//   }
-//   sayName() {
-//     console.log(`Имя: ${this.name} Фамилия: ${this.lastName}`);
-//   }
-// }
-
-// let heiter = new Heiter("Bobi", "English");
-// heiter.sayName();
-
-// let animal = {
-//   name: "Animal",
-//   age: 7,
-//   hastTall: true,
-// };
-
-// class Animal {
-//   constructor(options) {
-//     this.name = options.name;
-//     this.age = options.age;
-//     this.hasTall = options.hasTall;
-//   }
-//   voiceAnimal() {
-//     console.log(`i am ${this.hasTall}`);
-//   }
-// }
-
-// const cat = new Animal({
-//   name: "cat",
-//   age: 3,
-//   hasTall: true,
-// });
-
-// const dog = new Animal({
-//   name: "dog",
-//   age: "5",
-//   hasTall: false,
-// });
-
-// console.log(cat.voiceAnimal());
-// console.log(dog.voiceAnimal());
-
 class Storage {
   constructor() {
     this.DrinkStorage = {
@@ -84,7 +21,7 @@ class Storage {
     for (let i in this.DrinkStorage) {
       if (this.DrinkStorage[i] === this.DrinkStorage[key]) {
         delete this.DrinkStorage[i];
-        return true;
+        return alert("Напиток был удален");
       } else {
         return false;
       }
@@ -93,41 +30,58 @@ class Storage {
   getKeys() {
     return Object.keys(this.DrinkStorage);
   }
-  getBtn(nameId) {
-    return document.querySelector(nameId);
-  }
-  setInfo() {
-    // let that = this;
-    let qstionDrinck = prompt("Введи название напитка");
-    let qstionComposition = prompt("Введи состав напитка");
-    this.addValue(qstionDrinck, qstionComposition);
-  }
+  // getBtn(nameId) {
+  //   return document.querySelector(nameId);
+  // }
+  // setInfo() {
+  //   let qstionDrinck = prompt("Введи название напитка");
+  //   let qstionComposition = prompt("Введи состав напитка");
+  //   this.addValue(qstionDrinck, qstionComposition);
+  // }
+  // init() {
+  //   this.getBtn("#intInfoDrinck").addEventListener("click", this.setInfo);
+  // }
 }
 const drinck = new Storage();
-drinck.setInfo();
+
+init("#intInfoDrinck", setInfo);
+init("#getInfoDrinck", qstionInfoDrinck);
+init("#deletDrinck", deletDrinck);
+init("#infoDrinck", info);
 console.log(drinck);
-// drinck.getBtn("#intInfoDrinck").addEventListener("click", drinck.setInfo);
 
-// console.log(drinck.DrinkStorage);
-// let nameDrink = prompt("Введи название напитка");
-// let composishonDrink = prompt("Введи состав").split(",");
-// drinck.addValue(nameDrink, composishonDrink);
-// console.log(drinck);
+function info() {
+  let arr = [];
+  for (let i in drinck.DrinkStorage) {
+    arr.push(i);
+  }
+  alert(arr);
+}
 
-// function intNameDrinck() {
-//   let intName = prompt("хочешь узнать рецепт? введи название напитка");
-//   let curent = 0;
-//   for (let i in drinck.DrinkStorage) {
-//     if (i === intName) {
-//       alert(drinck.DrinkStorage[i]);
-//       curent++;
-//     }
-//   }
-//   alert(`Было найденно ${curent} напитков`);
-// }
-// intNameDrinck();
+function deletDrinck() {
+  let deletQstion = prompt("Какой напиток хочешь удалить?");
+  drinck.deleteValue(deletQstion);
+}
 
-// let qstionNameDrink = prompt("Какой напиток хочешь удалить?");
-// drinck.deleteValue(qstionNameDrink);
-// console.log(drinck);
-// alert(`Перечень всех напитков ${drinck.getKeys()}`);
+function qstionInfoDrinck() {
+  let counter = 0;
+  let qstion = prompt("О каком напитке ты хочешь узнать?");
+  for (let i in drinck.DrinkStorage) {
+    if (qstion === i) {
+      alert(drinck.DrinkStorage[i]);
+      counter++;
+    }
+  }
+  alert(`Было найдено ${counter} напитков`);
+}
+
+function setInfo() {
+  let qstionDrinck = prompt("Введи название напитка");
+  let qstionComposition = prompt("Введи состав напитка");
+  drinck.addValue(qstionDrinck, qstionComposition);
+}
+
+function init(nameId, foo) {
+  let btn = document.querySelector(nameId);
+  btn.addEventListener("click", foo);
+}
